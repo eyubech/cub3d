@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 16:40:03 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:50:23 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int start_game(t_cub_data *cb_data)
 	
 	cb_data->mlx = mlx;
 	
+	cb_data->player_x = 10;
+	cb_data->player_y = 20;
+	mlx_loop_hook(mlx, ft_hook, cb_data);
 	draw_map(cb_data, mlx);
 	
 
-	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 
 	

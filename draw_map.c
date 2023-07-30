@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 16:40:33 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:52:40 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,35 @@
 
 void ft_hook(void* param)
 {
-	mlx_t* mlx = param;
+	t_cub_data *cb_data = param;
 
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
+	if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(cb_data->mlx);
     
-    if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT))
     {
-        
+        printf("Right\n");
+        cb_data->player_x += 2;
+        draw_map(cb_data, cb_data->mlx);
     }
-        
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT))
+    {
+        printf("Right\n");
+        cb_data->player_x -= 2;
+        draw_map(cb_data, cb_data->mlx);
+    }
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
+    {
+        printf("Right\n");
+        cb_data->player_y -= 2;
+        draw_map(cb_data, cb_data->mlx);
+    }
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
+    {
+        printf("Right\n");
+        cb_data->player_y += 2;
+        draw_map(cb_data, cb_data->mlx);
+    }
     
 }
 
@@ -137,9 +156,9 @@ void draw_map(t_cub_data *cb_data, mlx_t* mlx)
                 draw_box(map, x, y, 0xFFFFFFFF);
             if (cb_data->map[i][j] == 'P')
             {
-                cb_data->player_x = x;
-                cb_data->player_y = y;
-                draw_player(player, x, y);
+                // cb_data->player_x = x;
+                // cb_data->player_y = y;
+                draw_player(player, cb_data->player_x, cb_data->player_y);
             }
             j += 1;
             x += 50;
