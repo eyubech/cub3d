@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 18:52:40 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:18:33 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,31 @@ void ft_hook(void* param)
 {
 	t_cub_data *cb_data = param;
 
+     
 	if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cb_data->mlx);
     
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT))
     {
-        printf("Right\n");
         cb_data->player_x += 2;
-        draw_map(cb_data, cb_data->mlx);
+        // draw_map(cb_data, cb_data->mlx);
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT))
     {
-        printf("Right\n");
         cb_data->player_x -= 2;
-        draw_map(cb_data, cb_data->mlx);
+        // draw_map(cb_data, cb_data->mlx);
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
     {
-        printf("Right\n");
         cb_data->player_y -= 2;
-        draw_map(cb_data, cb_data->mlx);
+        // draw_map(cb_data, cb_data->mlx);
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
-        printf("Right\n");
         cb_data->player_y += 2;
-        draw_map(cb_data, cb_data->mlx);
     }
+        draw_map(cb_data, cb_data->mlx);
+        draw_player(cb_data->map_img, cb_data->player_x, cb_data->player_y);
     
 }
 
@@ -135,15 +133,13 @@ void draw_map(t_cub_data *cb_data, mlx_t* mlx)
     int x;
     int y;
 
+    (void)mlx;
     i = 0;
     
     y = 0;
-    mlx_image_t* map = mlx_new_image(mlx, 550, 550);
-    mlx_image_t* lines = mlx_new_image(mlx, 550, 550);
-    mlx_image_t* player = mlx_new_image(mlx, 550, 550);
-	mlx_image_to_window(mlx, map, 0, 0);
-    mlx_image_to_window(mlx, lines, 0, 0);
-    mlx_image_to_window(mlx, player, 0, 0);
+    // draw_player(cb_data->player, cb_data->player_x, cb_data->player_y);
+    
+
     while (cb_data->map[i])
     {
         j = 0;
@@ -151,21 +147,21 @@ void draw_map(t_cub_data *cb_data, mlx_t* mlx)
         while (cb_data->map[i][j])
         {
             if (cb_data->map[i][j] == '1')
-                draw_box(map, x, y, 0x0000FFFF);
+                draw_box(cb_data->map_img, x, y, 0x0000FFFF);
             else
-                draw_box(map, x, y, 0xFFFFFFFF);
-            if (cb_data->map[i][j] == 'P')
-            {
-                // cb_data->player_x = x;
-                // cb_data->player_y = y;
-                draw_player(player, cb_data->player_x, cb_data->player_y);
-            }
+                draw_box(cb_data->map_img, x, y, 0xFFFFFFFF);
+            // if (cb_data->map[i][j] == 'P')
+            // {
+            //     // cb_data->player_x = x;
+            //     // cb_data->player_y = y;
+                
+            // }
             j += 1;
             x += 50;
         }
         y += 50;
         i += 1;
     }
-    draw_line_ver(lines);
-    draw_line_hor(lines);
+    draw_line_ver(cb_data->map_img);
+    draw_line_hor(cb_data->map_img);
 }

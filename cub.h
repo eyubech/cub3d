@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 18:35:20 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/07/30 19:07:05 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct t_cub_data
 	int player_x;
 	int player_y;
 	mlx_image_t* player;
+	mlx_image_t* lines;
+	mlx_image_t* map_img;
 	mlx_t* mlx;
 }	t_cub_data;
 
