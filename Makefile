@@ -25,5 +25,5 @@ fclean : clean
 	rm -rf $(NAME)
 
 
-re : fclean All
+re : fclean all
 

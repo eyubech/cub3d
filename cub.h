@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 19:07:05 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:38:22 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "MLX42/include/MLX42/MLX42.h"
+#include <math.h>
 
 #define WIDTH 550
 #define HEIGHT 350
@@ -34,7 +35,11 @@ typedef struct t_cub_data
 	mlx_image_t* lines;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
+	float px_dir;
+	float py_dir;
+	float rotation_angle;
 }	t_cub_data;
+
 
 
 

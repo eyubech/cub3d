@@ -6,44 +6,14 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 21:18:33 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:32:20 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 
-void ft_hook(void* param)
-{
-	t_cub_data *cb_data = param;
 
-     
-	if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(cb_data->mlx);
-    
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT))
-    {
-        cb_data->player_x += 2;
-        // draw_map(cb_data, cb_data->mlx);
-    }
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT))
-    {
-        cb_data->player_x -= 2;
-        // draw_map(cb_data, cb_data->mlx);
-    }
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
-    {
-        cb_data->player_y -= 2;
-        // draw_map(cb_data, cb_data->mlx);
-    }
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
-    {
-        cb_data->player_y += 2;
-    }
-        draw_map(cb_data, cb_data->mlx);
-        draw_player(cb_data->map_img, cb_data->player_x, cb_data->player_y);
-    
-}
 
 void draw_line_ver(mlx_image_t* lines)
 {
@@ -107,8 +77,10 @@ void draw_box(mlx_image_t* map, int x, int y, uint32_t color)
 
 void draw_player(mlx_image_t* player, int player_x, int player_y)
 {
-	int i = player_x + 15;
-	int j = player_y + 15;
+	int i = player_x + 16;
+	int j = player_y + 16;
+    int x = player_x + 8;
+    int y = player_y + 8;
     int save_x = player_x;
 	
 	while (player_y < j)
@@ -121,6 +93,9 @@ void draw_player(mlx_image_t* player, int player_x, int player_y)
         }
 		player_y += 1;
 	}
+    i = 25;
+    while (i--)
+        mlx_put_pixel(player, x, y--, 0xFF0000FF);
 }
 
 
@@ -137,9 +112,6 @@ void draw_map(t_cub_data *cb_data, mlx_t* mlx)
     i = 0;
     
     y = 0;
-    // draw_player(cb_data->player, cb_data->player_x, cb_data->player_y);
-    
-
     while (cb_data->map[i])
     {
         j = 0;
