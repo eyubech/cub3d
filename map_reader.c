@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:31:53 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/30 15:21:15 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:48:38 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	read_map(t_cub_data *cb_data)
 	cb_data->map[2] = ft_strdup("10000000001");
 	cb_data->map[3] = ft_strdup("10010000001");
 	cb_data->map[4] = ft_strdup("10000000001");
-	cb_data->map[5] = ft_strdup("10000000011");
+	cb_data->map[5] = ft_strdup("10000000001");
 	cb_data->map[6] = ft_strdup("11111111111");
 	cb_data->map[7] = NULL;
 	

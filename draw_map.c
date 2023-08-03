@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 12:21:27 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:18:56 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,34 @@ void draw_line_hor(mlx_image_t* lines)
     }
     
 }
+void draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map) {
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = x0 < x1 ? 1 : -1;
+    int sy = y0 < y1 ? 1 : -1;
+    int err = (dx > dy ? dx : -dy) / 2;
+    int e2;
+
+    while (1) {
+        mlx_put_pixel(map,x0, y0, 0xFF0000FF);
+
+        if (x0 == x1 && y0 == y1)
+            break;
+
+        e2 = err;
+
+        if (e2 > -dx) {
+            err -= dy;
+            x0 += sx;
+        }
+
+        if (e2 < dy) {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
 
 void ft_dda(mlx_image_t* map, int p1_x, int p1_y, int p2_x, int p2_y)
 {
@@ -94,10 +122,9 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
 {
 	int i = player_x + 16;
 	int j = player_y + 16;
-    // cb_data->end_x = player_x + 10;
-    // cb_data->end_y = player_y + 10;
-    // int x = player_x + 8;
-    // int y = player_y + 8;
+    (void)cb_data;
+    cb_data->end_x = cb_data->px_dir + player_x;
+    cb_data->end_y = cb_data->py_dir + player_y;
     float save_x = player_x;
 	
 	while (player_y < j)
@@ -110,7 +137,7 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
         }
 		player_y += 1;
 	}
-    ft_dda(player, player_x, player_y, cb_data->end_x, cb_data->end_y);
+    draw_line(player_x -8, player_y-8, player_x + cos(cb_data->rotation_angle)*50, player_y + sin(cb_data->rotation_angle)*50,player);
     // i = 25;
     // while (i--)
     //     mlx_put_pixel(player, x, y--, 0xFF0000FF);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 11:17:29 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:40:56 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,18 @@ char	*ft_strtrim(char *s1, char *set);
 char	*get_next_line(int fd);
 char	*ft_strchr(char *s, int c);
 void	draw_map(t_cub_data *cb_data, mlx_t* mlx);
-void	ft_hook(void* param);
 void	draw_line_ver(mlx_image_t* lines);
 void	draw_line_hor(mlx_image_t* lines);
 void	draw_box(mlx_image_t* map, int x, int y, uint32_t color);
 void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data);
 void	ft_dda(mlx_image_t* map, int p1_x, int p1_y, int p2_x, int p2_y);
+
+
+
+
+void	ft_hook(void* param);
+// void	ft_hook(struct mlx_key_data key_data, void *param);
+
+
+
 #endif
