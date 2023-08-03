@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 11:42:37 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/03 12:23:43 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void ft_hook(void* param)
         mlx_close_window(cb_data->mlx);
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT))
     {
-        cb_data->rotation_angle -= 0.1;
-        cb_data->end_y = cb_data->rotation_angle;
+        cb_data->rotation_angle -= 0.05;
+        cb_data->end_y -= 0.05;
         if (cb_data->rotation_angle < 0)
             cb_data->rotation_angle += 2 * M_PI;
         cb_data->px_dir = cos(cb_data->rotation_angle) * 5;
@@ -29,8 +29,8 @@ void ft_hook(void* param)
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT))
     {   
-        cb_data->rotation_angle += 0.1;
-        cb_data->end_y = cb_data->rotation_angle;
+        cb_data->rotation_angle += 0.05;
+        cb_data->end_y += 0.05;
         if (cb_data->rotation_angle >= 2 * M_PI)
             cb_data->rotation_angle -= 2 * M_PI;
         cb_data->px_dir = cos(cb_data->rotation_angle) * 5;
@@ -76,6 +76,9 @@ int start_game(t_cub_data *cb_data)
     // cb_data->px_dir = 0;
     cb_data->px_dir = cos(cb_data->rotation_angle) * 3;
     cb_data->py_dir = sin(cb_data->rotation_angle) * 3;
+    cb_data->end_x = cb_data->player_x + 10;
+    cb_data->end_y = cb_data->player_y + 10;
+    
 	mlx_loop_hook(mlx, ft_hook, cb_data);
 	
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 11:22:26 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/03 12:21:27 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void ft_dda(mlx_image_t* map, int p1_x, int p1_y, int p2_x, int p2_y)
 	while (i < max)
 	{
         mlx_put_pixel(map, x, y, 0xFF0000);
-		// my_mlx_pixel_put(&mlx->img, x, y, 0x000000);	
 		x += step_x;
 		y += step_y;
 		i++;
@@ -95,8 +94,8 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
 {
 	int i = player_x + 16;
 	int j = player_y + 16;
-    cb_data->end_x = player_x + 10;
-    cb_data->end_y = player_y + 10;
+    // cb_data->end_x = player_x + 10;
+    // cb_data->end_y = player_y + 10;
     // int x = player_x + 8;
     // int y = player_y + 8;
     float save_x = player_x;
