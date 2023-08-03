@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 16:38:50 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:36:15 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // void	ft_hook(struct mlx_key_data key_data, void *param)
 void	ft_hook(void* param)
 {
+    int nex_step_x;
+    int nex_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
 
     // (void)key_data;
@@ -49,16 +51,26 @@ void	ft_hook(void* param)
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
     {
-        cb_data->player_x += cb_data->px_dir;
-        cb_data->player_y += cb_data->py_dir;
+        nex_step_x = cb_data->player_x + cb_data->px_dir;
+        nex_step_y = cb_data->player_y + cb_data->py_dir;
+        if(cb_data->map[((int)nex_step_y + 16) / 50][((int)nex_step_x + 16) / 50] != '1')
+        {
+            cb_data->player_x += cb_data->px_dir;
+            cb_data->player_y += cb_data->py_dir;
+        }
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
-        cb_data->player_x -= cb_data->px_dir;
-        cb_data->player_y -= cb_data->py_dir;
+        nex_step_x = cb_data->player_x - cb_data->px_dir;
+        nex_step_y = cb_data->player_y - cb_data->py_dir;
+        if(cb_data->map[((int)nex_step_y + 16) / 50][((int)nex_step_x + 16) / 50] != '1')
+        {
+            cb_data->player_x -= cb_data->px_dir;
+            cb_data->player_y -= cb_data->py_dir;
+            
+        }
+        
     }
-    // cb_data->px_dir = cb_data->px_dir * cos(cb_data->rotation_angle) - cb_data->py_dir * sin(cb_data->rotation_angle);
-    // cb_data->py_dir = cb_data->px_dir * sin(cb_data->rotation_angle) + cb_data->py_dir * cos(cb_data->rotation_angle);
     draw_map(cb_data, cb_data->mlx);
     draw_player(cb_data->map_img, cb_data->player_x, cb_data->player_y , cb_data);
 }
