@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/31 14:38:22 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:17:29 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,23 @@
 #define WIDTH 550
 #define HEIGHT 350
 
-
 typedef struct t_cub_data
 {
 	char *map_name;
 	char **map;
 	int map_fd;
-	int player_x;
-	int player_y;
+	float player_x;
+	float player_y;
+	float end_x;
+	float end_y;
 	mlx_image_t* player;
 	mlx_image_t* lines;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
-	float px_dir;
-	float py_dir;
+	float px_dir; //turn_direction
+	float py_dir; //walkdirection
 	float rotation_angle;
+	float move_step;
 }	t_cub_data;
 
 
@@ -60,5 +62,6 @@ void	ft_hook(void* param);
 void	draw_line_ver(mlx_image_t* lines);
 void	draw_line_hor(mlx_image_t* lines);
 void	draw_box(mlx_image_t* map, int x, int y, uint32_t color);
-void	draw_player(mlx_image_t* player, int player_x, int player_y);
+void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data);
+void	ft_dda(mlx_image_t* map, int p1_x, int p1_y, int p2_x, int p2_y);
 #endif
