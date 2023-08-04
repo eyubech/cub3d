@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 18:36:15 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:34:27 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // void	ft_hook(struct mlx_key_data key_data, void *param)
 void	ft_hook(void* param)
 {
-    int nex_step_x;
-    int nex_step_y;
+    int next_step_x;
+    int next_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
 
     // (void)key_data;
@@ -51,9 +51,9 @@ void	ft_hook(void* param)
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
     {
-        nex_step_x = cb_data->player_x + cb_data->px_dir;
-        nex_step_y = cb_data->player_y + cb_data->py_dir;
-        if(cb_data->map[((int)nex_step_y + 16) / 50][((int)nex_step_x + 16) / 50] != '1')
+        next_step_x = cb_data->player_x + cb_data->px_dir;
+        next_step_y = cb_data->player_y + cb_data->py_dir;
+        if(cb_data->map[((int)next_step_y + 16) / 50][((int)next_step_x + 16) / 50] != '1')
         {
             cb_data->player_x += cb_data->px_dir;
             cb_data->player_y += cb_data->py_dir;
@@ -61,9 +61,9 @@ void	ft_hook(void* param)
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
-        nex_step_x = cb_data->player_x - cb_data->px_dir;
-        nex_step_y = cb_data->player_y - cb_data->py_dir;
-        if(cb_data->map[((int)nex_step_y + 16) / 50][((int)nex_step_x + 16) / 50] != '1')
+        next_step_x = cb_data->player_x - cb_data->px_dir;
+        next_step_y = cb_data->player_y - cb_data->py_dir;
+        if(cb_data->map[((int)next_step_y + 16) / 50][((int)next_step_x + 16) / 50] != '1')
         {
             cb_data->player_x -= cb_data->px_dir;
             cb_data->player_y -= cb_data->py_dir;

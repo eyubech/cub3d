@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/03 17:18:56 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:37:01 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void draw_line_hor(mlx_image_t* lines)
     }
     
 }
-void draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map) {
+void draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map) 
+{
     int dx = abs(x1 - x0);
     int dy = abs(y1 - y0);
     int sx = x0 < x1 ? 1 : -1;
@@ -60,45 +61,29 @@ void draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map) {
     int err = (dx > dy ? dx : -dy) / 2;
     int e2;
 
-    while (1) {
-        mlx_put_pixel(map,x0, y0, 0xFF0000FF);
+    while (1) 
+    {
+        mlx_put_pixel(map,x0, y0, 0x008000FF);
 
         if (x0 == x1 && y0 == y1)
             break;
 
         e2 = err;
 
-        if (e2 > -dx) {
+        if (e2 > -dx) 
+        {
             err -= dy;
             x0 += sx;
         }
 
-        if (e2 < dy) {
+        if (e2 < dy) 
+        {
             err += dx;
             y0 += sy;
         }
     }
 }
 
-
-void ft_dda(mlx_image_t* map, int p1_x, int p1_y, int p2_x, int p2_y)
-{
-	int i = 0;
-	float dx = fabs((float)p1_x - (float)p2_x);
-	float dy = fabs((float)p1_y - (float)p2_y);
-	float max = fmax(dx , dy);
-	float step_x = dx / max; // 1
-	float step_y = dy / max; // 0.5
-	float x = p1_x ;
-	float y = p1_y;
-	while (i < max)
-	{
-        mlx_put_pixel(map, x, y, 0xFF0000);
-		x += step_x;
-		y += step_y;
-		i++;
-	}
-}
 
 void draw_box(mlx_image_t* map, int x, int y, uint32_t color)
 {
@@ -126,7 +111,6 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
     cb_data->end_x = cb_data->px_dir + player_x;
     cb_data->end_y = cb_data->py_dir + player_y;
     float save_x = player_x;
-	
 	while (player_y < j)
 	{
 		player_x = save_x;
@@ -137,7 +121,9 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
         }
 		player_y += 1;
 	}
-    draw_line(player_x -8, player_y-8, player_x + cos(cb_data->rotation_angle)*50, player_y + sin(cb_data->rotation_angle)*50,player);
+
+    // draw_line(player_x -8, player_y-8, player_x + cos(cb_data->rotation_angle) * 50, player_y + sin(cb_data->rotation_angle)*50,player);
+    ray_cast(cb_data, player_x, player_y);
     // i = 25;
     // while (i--)
     //     mlx_put_pixel(player, x, y--, 0xFF0000FF);
