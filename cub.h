@@ -6,7 +6,7 @@
 /*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/04 17:37:54 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/05 15:13:14 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,39 @@
 #define HEIGHT 350
 #define FOV 60 * (M_PI / 180)
 #define NUM_RAYS 100
+#define CELL_SIZE 50
+
+typedef struct s_ray
+{
+	float ray_angle;
+
+} t_ray;
+
+typedef struct s_player
+{
+	float player_x;
+	float player_y;
+	float end_x;
+	float end_y;
+	float px_dir;
+	float py_dir;
+	float rotation_angle;
+	
+} t_player;
 
 typedef struct t_cub_data
 {
 	char *map_name;
 	char **map;
 	int map_fd;
-	float player_x;
-	float player_y;
-	float end_x;
-	float end_y;
 	mlx_image_t* player;
 	mlx_image_t* lines;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
-	float px_dir;
-	float py_dir;
-	float rotation_angle;
-	float move_step;
+	t_ray ray;
+	t_player c_player;
 	
 }	t_cub_data;
-
-
 
 
 size_t	ft_strlen(char *s);

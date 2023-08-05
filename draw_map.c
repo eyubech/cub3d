@@ -6,7 +6,7 @@
 /*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/04 17:37:01 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:34:05 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
 	int i = player_x + 16;
 	int j = player_y + 16;
     (void)cb_data;
-    cb_data->end_x = cb_data->px_dir + player_x;
-    cb_data->end_y = cb_data->py_dir + player_y;
+    cb_data->c_player.end_x = cb_data->c_player.px_dir + player_x;
+    cb_data->c_player.end_y = cb_data->c_player.py_dir + player_y;
     float save_x = player_x;
 	while (player_y < j)
 	{
