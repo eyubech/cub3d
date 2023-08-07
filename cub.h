@@ -6,7 +6,7 @@
 /*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:14 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:50:05 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@
 #define FOV 60 * (M_PI / 180)
 #define NUM_RAYS 100
 #define CELL_SIZE 50
+#define IS_WALL 0
 
 typedef struct s_ray
 {
 	float ray_angle;
+	float Hx_Dist;
+	float Hy_Dist;
+	float wall_coor;
 
 } t_ray;
 
@@ -79,7 +83,7 @@ void	draw_box(mlx_image_t* map, int x, int y, uint32_t color);
 void	draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data);
 void	draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map);
 void	ray_cast(t_cub_data *cb_data, int player_x, int player_y);
-
+int		is_wall(float x, float y, t_cub_data *cb_data);
 
 void	ft_hook(void* param);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
