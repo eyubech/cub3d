@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/05 11:33:46 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:12:51 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ void	ft_hook(void* param)
     int next_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
 
-    // (void)key_data;
-
-    // printf("** %f\n **", cb_data->rotation_angle);
-    
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cb_data->mlx);
 
@@ -80,23 +76,19 @@ int start_game(t_cub_data *cb_data)
     if (read_map(cb_data) == -1)
 		return (-1);
 	
-	
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Happy Happy", false);
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "LOL", false);
 	
 	cb_data->mlx = mlx;
-	 
 	cb_data->c_player.player_x = 200;
 	cb_data->c_player.player_y = 200;
+
+
+    
+    
 	cb_data->map_img = mlx_new_image(mlx, 550, 550);
-    // cb_data->lines = mlx_new_image(mlx, 550, 550);
-    // cb_data->player = mlx_new_image(mlx, 550, 550);
 	mlx_image_to_window(mlx, cb_data->map_img, 0, 0);
-    // mlx_image_to_window(mlx, cb_data->lines, 0, 0);
-    // mlx_image_to_window(mlx, cb_data->player, 0, 0);
-	
+
     cb_data->c_player.rotation_angle = M_PI_2;
-    // cb_data->px_dir = 0;
-    // cb_data->px_dir = 0;
     cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 3;
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
     

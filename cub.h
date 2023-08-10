@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/07 09:50:05 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:18:39 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 #define FOV 60 * (M_PI / 180)
 #define NUM_RAYS 100
 #define CELL_SIZE 50
-#define IS_WALL 0
 
 typedef struct s_ray
 {
@@ -60,7 +59,6 @@ typedef struct t_cub_data
 	mlx_t* mlx;
 	t_ray ray;
 	t_player c_player;
-	
 }	t_cub_data;
 
 
@@ -84,7 +82,7 @@ void	draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
 void	draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map);
 void	ray_cast(t_cub_data *cb_data, int player_x, int player_y);
 int		is_wall(float x, float y, t_cub_data *cb_data);
-
+char	*ft_itoa(int n);
 void	ft_hook(void* param);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
 
