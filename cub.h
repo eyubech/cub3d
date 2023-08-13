@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/09 17:18:39 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:49:52 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 typedef struct s_ray
 {
 	float ray_angle;
-	float Hx_Dist;
-	float Hy_Dist;
-	float wall_coor;
+	float distance;
+	float hit;
+	float hit_side;
 
 } t_ray;
 
@@ -82,10 +82,7 @@ void	draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
 void	draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map);
 void	ray_cast(t_cub_data *cb_data, int player_x, int player_y);
 int		is_wall(float x, float y, t_cub_data *cb_data);
-char	*ft_itoa(int n);
 void	ft_hook(void* param);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
-
-
 
 #endif

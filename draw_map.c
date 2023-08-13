@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/09 17:23:37 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:54:59 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,27 +183,27 @@ void draw_box(mlx_image_t* map, int x, int y, uint32_t color)
 
 void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data)
 {
-	int i = player_x + 16;
-	int j = player_y + 16;
-    (void)cb_data;
-    cb_data->c_player.end_x = cb_data->c_player.px_dir + player_x;
-    cb_data->c_player.end_y = cb_data->c_player.py_dir + player_y;
-    float save_x = player_x;
-	while (player_y < j)
-	{
-		player_x = save_x;
-		while (player_x < i)
-        {
-            if(player_x <= WIDTH && player_y <= HEIGHT)
-            {
-			    mlx_put_pixel(player, player_x, player_y, 0xFF0000FF);
-                player_x += 1;
-            }
-        }
-		player_y += 1;
-	}
+	// int i = player_x + 16;
+	// int j = player_y + 16;
+    // (void)cb_data;
+    // cb_data->c_player.end_x = cb_data->c_player.px_dir + player_x;
+    // cb_data->c_player.end_y = cb_data->c_player.py_dir + player_y;
+    // float save_x = player_x;
+	// while (player_y < j)
+	// {
+	// 	player_x = save_x;
+	// 	while (player_x < i)
+    //     {
+    //         if(player_x <= WIDTH && player_y <= HEIGHT)
+    //         {
+	// 		    mlx_put_pixel(player, player_x, player_y, 0xFF0000FF);
+    //             player_x += 1;
+    //         }
+    //     }
+	// 	player_y += 1;
+	// }
     ray_cast(cb_data, player_x, player_y); 
-    draw_curs(player_x -8, player_y-8, player_x + cos(cb_data->c_player.rotation_angle) * 50, player_y + sin(cb_data->c_player.rotation_angle)*50,player);
+    draw_curs(player_x , player_y , player_x + cos(cb_data->c_player.rotation_angle) * 50, player_y + sin(cb_data->c_player.rotation_angle)*50,player);
 }
 
 
