@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/14 16:50:19 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:31:11 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_hook(void* param)
     int next_step_x;
     int next_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
+    
 
+
+    
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cb_data->mlx);
 
@@ -32,7 +35,7 @@ void	ft_hook(void* param)
             cb_data->c_player.rotation_angle += 2 * M_PI;
         cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 5;
         cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 5;
-        draw_map(cb_data, cb_data->mlx);
+        draw_map(cb_data);
         draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
     }
 
@@ -44,7 +47,7 @@ void	ft_hook(void* param)
             cb_data->c_player.rotation_angle -= 2 * M_PI;
         cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 5;
         cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 5;
-        draw_map(cb_data, cb_data->mlx);
+        draw_map(cb_data);
         draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
@@ -56,7 +59,7 @@ void	ft_hook(void* param)
             cb_data->c_player.player_x += cb_data->c_player.px_dir / 4;
             cb_data->c_player.player_y += cb_data->c_player.py_dir / 4;
         }
-        draw_map(cb_data, cb_data->mlx);
+        draw_map(cb_data);
         draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
@@ -69,7 +72,7 @@ void	ft_hook(void* param)
             cb_data->c_player.player_y -= cb_data->c_player.py_dir / 4;
             
         }
-        draw_map(cb_data, cb_data->mlx);
+        draw_map(cb_data);
         draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
     }
     
@@ -95,7 +98,7 @@ int start_game(t_cub_data *cb_data)
     cb_data->c_player.rotation_angle = 0.785398; 
     cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 3;
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
-    draw_map(cb_data, cb_data->mlx);
+    draw_map(cb_data);
     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
 	mlx_loop_hook(mlx, ft_hook, cb_data);
 	// mlx_key_hook(mlx, ft_hook, cb_data);

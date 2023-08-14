@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/14 16:48:26 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:34:52 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void draw_line_ver(mlx_image_t* lines)
     int x=0;
     int y=0;
 
-    while (x <= MAP_WIDTH)
+    while (x < MAP_WIDTH)
     {
         y = 0;
-        while (y <= MAP_HEIGHT)
+        while (y < MAP_HEIGHT)
         {
             mlx_put_pixel(lines, x, y, 0x808080FF);
             y += 1;
@@ -38,10 +38,10 @@ void draw_line_hor(mlx_image_t* lines)
     int x=0;
     int y=0;
 
-    while (y <= MAP_HEIGHT)
+    while (y < MAP_HEIGHT)
     {
         x = 0;
-        while (x <= MAP_WIDTH)
+        while (x < MAP_WIDTH)
         {
             mlx_put_pixel(lines, x, y, 0x808080FF);
             x += 1;
@@ -164,19 +164,20 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
 
 
 
-void draw_map(t_cub_data *cb_data, mlx_t* mlx)
+void draw_map(t_cub_data *cb_data)
 {
     int i;
     int j;
     int x;
     int y;
 
-    (void)mlx;
+
     i = 0;
     
     y = 0;
     while (cb_data->map[i])
     {
+        printf("** %s\n", cb_data->map[i]);
         j = 0;
         x = 0;
         while (cb_data->map[i][j])
@@ -185,11 +186,9 @@ void draw_map(t_cub_data *cb_data, mlx_t* mlx)
                 draw_box(cb_data->map_img, x, y, 0x0000FFFF);
             else
                 draw_box(cb_data->map_img, x, y, 0xFFFFFFFF);
-            printf("%c", cb_data->map[i][j]);
             j += 1;
             x += CELL_SIZE;
         }
-        printf("\n");
         y += CELL_SIZE;
         i += 1;
     }
