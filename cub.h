@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/13 15:49:52 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:55:35 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@
 #include "MLX42/include/MLX42/MLX42.h"
 
 
-#define WIDTH 550
-#define HEIGHT 350
+#define MAP_WIDTH 24 * 15
+#define MAP_HEIGHT 7 * 15
+
+
+#define WIDTH 1080
+#define HEIGHT 720
+
 #define FOV 60 * (M_PI / 180)
-#define NUM_RAYS 100
-#define CELL_SIZE 50
+#define NUM_RAYS 1080
+#define CELL_SIZE 15
+#define PLAYER_SIZE 4
+
 
 typedef struct s_ray
 {
