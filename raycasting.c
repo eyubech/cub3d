@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:06:23 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/13 16:02:17 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:48:39 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	ray_cast(t_cub_data *cb_data, int player_x, int player_y)
 			else
 				hy_inter = (int)(player_y / CELL_SIZE) * CELL_SIZE;
 			hx_inter = player_x + ((hy_inter - player_y) / tan(cb_data->ray.ray_angle));
-			printf("angle:%f\n", cb_data->ray.ray_angle);
+			// printf("angle:%f\n", cb_data->ray.ray_angle);
 			
-			// printf("tangent:%f\n", tan(cb_data->ray.ray_angle));
-			printf("----->:%f\n", (hy_inter - player_y) / tan(cb_data->ray.ray_angle));
-			printf("hx:%f hy:%f\n", hx_inter, hy_inter);
-			printf("px:%d py:%d\n", player_x, player_y);
+			// // printf("tangent:%f\n", tan(cb_data->ray.ray_angle));
+			// printf("----->:%f\n", (hy_inter - player_y) / tan(cb_data->ray.ray_angle));
+			// printf("hx:%f hy:%f\n", hx_inter, hy_inter);
+			// printf("px:%d py:%d\n", player_x, player_y);
 			
 			delta_y = CELL_SIZE;
 			if(sin(cb_data->ray.ray_angle) < 0)
@@ -67,7 +67,7 @@ void	ray_cast(t_cub_data *cb_data, int player_x, int player_y)
 			
 			
 			int check_h = 0;
-			while(hx_inter >= 0 && hx_inter < WIDTH && hy_inter >= 0 && hy_inter < HEIGHT)
+			while(hx_inter >= 0 && hx_inter < MAP_WIDTH && hy_inter >= 0 && hy_inter < MAP_HEIGHT)
 			{
 				if(sin(cb_data->ray.ray_angle) <= 0)
 					check_h = hy_inter - 1;
@@ -99,7 +99,7 @@ void	ray_cast(t_cub_data *cb_data, int player_x, int player_y)
 			
 			
 			int check_v = 0;
-			while(vx_inter >= 0 && vx_inter < WIDTH && vy_inter >= 0 && vy_inter < HEIGHT)
+			while(vx_inter >= 0 && vx_inter < MAP_WIDTH && vy_inter >= 0 && vy_inter < MAP_HEIGHT)
 			{
 				if(cos(cb_data->ray.ray_angle) <= 0)
 					check_v = vx_inter - 1;
