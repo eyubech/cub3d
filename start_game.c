@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/14 18:31:11 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:02:53 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int start_game(t_cub_data *cb_data)
 		return (-1);
 	
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "LOL", false);
-	
 	cb_data->mlx = mlx;
 	cb_data->c_player.player_x = 100;
 	cb_data->c_player.player_y = 50;
@@ -93,11 +92,14 @@ int start_game(t_cub_data *cb_data)
     
     
 	cb_data->map_img = mlx_new_image(mlx, MAP_WIDTH, MAP_HEIGHT);
-	mlx_image_to_window(mlx, cb_data->map_img, 0, 0);
 
+    cb_data->background = mlx_new_image(mlx, WIDTH, HEIGHT);    
+    mlx_image_to_window(mlx, cb_data->background, 0, 0);
+	mlx_image_to_window(mlx, cb_data->map_img, 0, 0);
     cb_data->c_player.rotation_angle = 0.785398; 
     cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 3;
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
+    draw_background(cb_data->background);
     draw_map(cb_data);
     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
 	mlx_loop_hook(mlx, ft_hook, cb_data);

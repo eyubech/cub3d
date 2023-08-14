@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/14 18:30:21 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:00:18 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct t_cub_data
 	char **map;
 	int map_fd;
 	mlx_image_t* player;
-	mlx_image_t* lines;
+	mlx_image_t* background;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
 	t_ray ray;
@@ -91,6 +91,7 @@ void	draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map);
 void	ray_cast(t_cub_data *cb_data, int player_x, int player_y);
 int		is_wall(float x, float y, t_cub_data *cb_data);
 void	ft_hook(void* param);
+void	draw_background(mlx_image_t* background);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
 
 #endif

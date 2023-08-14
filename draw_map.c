@@ -6,11 +6,44 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/14 18:34:52 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:05:21 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+
+
+
+
+void draw_background(mlx_image_t* background)
+{
+    int x=0;
+    int y=0;
+    
+    while (x < WIDTH)
+    {
+        y = 0;
+        while (y < HEIGHT / 2)
+        {
+            mlx_put_pixel(background, x, y, 0x6F2DA8FF);
+            y += 1;
+        }
+        x += 1;
+    }
+    x = 0;
+    while (x < WIDTH)
+    {
+        y = HEIGHT / 2;
+        while (y < HEIGHT)
+        {
+            mlx_put_pixel(background, x, y, 0x808080FF);
+            y += 1;
+        }
+        x += 1;
+    }
+}
+
 
 
 
@@ -175,6 +208,7 @@ void draw_map(t_cub_data *cb_data)
     i = 0;
     
     y = 0;
+    
     while (cb_data->map[i])
     {
         printf("** %s\n", cb_data->map[i]);
