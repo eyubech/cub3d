@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/14 19:00:18 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:10:16 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 typedef struct s_ray
 {
 	float ray_angle;
-	float distance;
+	float r_distance;
 	float hit;
 	float hit_side;
 
@@ -61,12 +61,15 @@ typedef struct t_cub_data
 	char *map_name;
 	char **map;
 	int map_fd;
+	int check_draw_map;
 	mlx_image_t* player;
 	mlx_image_t* background;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
 	t_ray ray;
 	t_player c_player;
+	float ray_angle;
+	struct s_ray *s_ray;
 }	t_cub_data;
 
 
@@ -88,10 +91,11 @@ void	draw_line_hor(mlx_image_t* lines);
 void	draw_box(mlx_image_t* map, int x, int y, uint32_t color);
 void	draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data);
 void	draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map);
-void	ray_cast(t_cub_data *cb_data, int player_x, int player_y);
+void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player_y);
 int		is_wall(float x, float y, t_cub_data *cb_data);
 void	ft_hook(void* param);
 void	draw_background(mlx_image_t* background);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
+void	drawing_walls(mlx_image_t* lines,t_cub_data *cb_data, int index);
 
 #endif
