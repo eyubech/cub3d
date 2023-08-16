@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/15 14:30:45 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:45:46 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,12 @@ void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb
         }
 		player_y += 1;
 	}
-    ray_cast(player, cb_data, player_x, player_y); 
+    // ray_cast(player, cb_data, player_x, player_y); 
+    // draw_background(cb_data->map_img);
+    // draw_map(cb_data);
+
+
+    
     // draw_curs(player_x , player_y , player_x + cos(cb_data->c_player.rotation_angle) * 50, player_y + sin(cb_data->c_player.rotation_angle)*50,player);
 }
 

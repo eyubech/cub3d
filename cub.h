@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/15 13:10:16 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:46:46 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ typedef struct t_cub_data
 	char **map;
 	int map_fd;
 	int check_draw_map;
-	mlx_image_t* player;
-	mlx_image_t* background;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
 	t_ray ray;

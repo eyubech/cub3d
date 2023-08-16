@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:57:39 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/15 12:58:03 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:08:47 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void drawing_walls(mlx_image_t* lines,t_cub_data *cb_data, int index)
 {
+
 	// printf("%p\n", lines);
 	int y;
 	float Projected_Wall_Height;

@@ -14,7 +14,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 
-	$(CC)  libmlx42.a -Iinclude -lglfw -L"/goinfre/aech-che/.brew/opt/glfw/lib/" -fsanitize=address $(OBJ) -o $(NAME)
+	$(CC)  libmlx42.a -Iinclude -lglfw -L "$(HOME)/.brew/opt/glfw/lib/" -fsanitize=address $(OBJ) -o $(NAME)
 
 
 clean : 

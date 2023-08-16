@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/15 21:41:56 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:01:09 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ void	ft_hook(void* param)
         cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 5;
         cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 5;
 
-        if(cb_data->check_draw_map % 2 == 0)
-        {
-            draw_map(cb_data);
-            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-        }
+
         
     }
 
@@ -70,11 +66,11 @@ void	ft_hook(void* param)
             cb_data->c_player.rotation_angle -= 2 * M_PI;
         cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 5;
         cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 5;
-        if(cb_data->check_draw_map % 2 == 0)
-        {
-            draw_map(cb_data);
-            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-        }
+        // if(cb_data->check_draw_map % 2 == 0)
+        // {
+        //     draw_map(cb_data);
+        //     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+        // }
         
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
@@ -86,11 +82,11 @@ void	ft_hook(void* param)
             cb_data->c_player.player_x += cb_data->c_player.px_dir / 4;
             cb_data->c_player.player_y += cb_data->c_player.py_dir / 4;
         }
-        if(cb_data->check_draw_map % 2 == 0)
-        {
-            draw_map(cb_data);
-            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-        }
+        // if(cb_data->check_draw_map % 2 == 0)
+        // {
+        //     draw_map(cb_data);
+        //     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+        // }
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
@@ -102,15 +98,21 @@ void	ft_hook(void* param)
             cb_data->c_player.player_y -= cb_data->c_player.py_dir / 4;
             
         }
-        if(cb_data->check_draw_map % 2 == 0)
-        {
-            draw_map(cb_data);
-            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+        // if(cb_data->check_draw_map % 2 == 0)
+        // {
+        //     draw_map(cb_data);
+        //     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             
-        }
+        // }
     }
+    draw_background(cb_data->map_img);
+		    // draw_map(cb_data);
     
-    
+    ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+    // if(cb_data->check_draw_map % 2 == 0)
+    // {
+        draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+    // }
     
     
 }
@@ -130,19 +132,17 @@ int start_game(t_cub_data *cb_data)
     
 	cb_data->map_img = mlx_new_image(mlx, WIDTH, HEIGHT);
 
-    cb_data->background = mlx_new_image(mlx, WIDTH, HEIGHT);    
 	mlx_image_to_window(mlx, cb_data->map_img, 0, 0);
     cb_data->c_player.rotation_angle = 0.785398;
     cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 3;
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
-    draw_background(cb_data->map_img);
 
     cb_data->check_draw_map = 1;
 
+    draw_background(cb_data->map_img);
     
 	mlx_loop_hook(mlx, ft_hook, cb_data);
     
-	mlx_key_hook(mlx, show_map, cb_data);
 
 	mlx_loop(mlx);
 

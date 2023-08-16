@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:06:23 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/15 21:41:59 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:02:58 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player
 			//calcul the distance and choose the short distance 
 			hor_dist = sqrt(pow((player_x - hx_inter), 2) + pow((player_y - hy_inter), 2));
 			ver_dist = sqrt(pow((player_x - vx_inter), 2) + pow((player_y - vy_inter), 2));
+
+		    // draw_map(cb_data);
 			if(hor_dist < ver_dist)
 			{
 				cb_data->ray.r_distance = hor_dist;
@@ -118,6 +120,7 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player
 				draw_line(player_x, player_y, vx_inter, vy_inter, cb_data->map_img);
 			}
 			drawing_walls(player, cb_data, colomn);
+
 		cb_data->ray_angle += (FOV / NUM_RAYS);
 		colomn++;
 	}
