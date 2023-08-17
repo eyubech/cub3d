@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/16 12:01:09 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:44:28 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ void	show_map(struct mlx_key_data key_data, void *param)
     if (key_data.key == MLX_KEY_M && key_data.action == 0)
     {
         if(cb_data->check_draw_map % 2 == 0)
+        {
             draw_background(cb_data->map_img);
+            ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        }
         else
         {
             draw_map(cb_data);
+            draw_map_rays(cb_data);
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
         }
         cb_data->check_draw_map += 1;
@@ -31,16 +35,11 @@ void	show_map(struct mlx_key_data key_data, void *param)
 }
 void	ft_hook(void* param)
 {
-    int next_step_x;
-    int next_step_y;
+    float next_step_x;
+    float next_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
     
-    // int i = 0;
-    // while (i < NUM_RAYS)
-    // {
-    //     drawing_walls(cb_data->map_img, cb_data, i);
-    //     i += 1;
-    // }
+
     
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cb_data->mlx);
@@ -48,29 +47,40 @@ void	ft_hook(void* param)
     
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT))
     {
-        cb_data->c_player.rotation_angle -= 0.03;
+        cb_data->c_player.rotation_angle -= 0.08;
         if (cb_data->c_player.rotation_angle < 0)
             cb_data->c_player.rotation_angle += 2 * M_PI;
         cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 5;
         cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 5;
 
-
+        draw_background(cb_data->map_img);
+        ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        if(cb_data->check_draw_map % 2 == 0)
+        {
+            draw_map(cb_data);
+            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_map_rays(cb_data);
+        }
         
     }
 
     
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT))
     {   
-        cb_data->c_player.rotation_angle += 0.03;
+        cb_data->c_player.rotation_angle += 0.08;
         if (cb_data->c_player.rotation_angle >= 2 * M_PI)
             cb_data->c_player.rotation_angle -= 2 * M_PI;
         cb_data->c_player.px_dir = cos(cb_data->c_player.rotation_angle) * 5;
         cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 5;
-        // if(cb_data->check_draw_map % 2 == 0)
-        // {
-        //     draw_map(cb_data);
-        //     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-        // }
+        draw_background(cb_data->map_img);
+        ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        if(cb_data->check_draw_map % 2 == 0)
+        {
+            
+            draw_map(cb_data);
+            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_map_rays(cb_data);
+        }
         
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
@@ -82,11 +92,14 @@ void	ft_hook(void* param)
             cb_data->c_player.player_x += cb_data->c_player.px_dir / 4;
             cb_data->c_player.player_y += cb_data->c_player.py_dir / 4;
         }
-        // if(cb_data->check_draw_map % 2 == 0)
-        // {
-        //     draw_map(cb_data);
-        //     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-        // }
+        draw_background(cb_data->map_img);
+        ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        if(cb_data->check_draw_map % 2 == 0)
+        {
+            draw_map(cb_data);
+            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_map_rays(cb_data);
+        }
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
@@ -98,21 +111,16 @@ void	ft_hook(void* param)
             cb_data->c_player.player_y -= cb_data->c_player.py_dir / 4;
             
         }
-        // if(cb_data->check_draw_map % 2 == 0)
-        // {
-        //     draw_map(cb_data);
-        //     draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-            
-        // }
+        draw_background(cb_data->map_img);
+        ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        if(cb_data->check_draw_map % 2 == 0)
+        {
+            draw_map(cb_data);
+            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_map_rays(cb_data);
+        }
     }
-    draw_background(cb_data->map_img);
-		    // draw_map(cb_data);
     
-    ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
-    // if(cb_data->check_draw_map % 2 == 0)
-    // {
-        draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-    // }
     
     
 }
@@ -140,9 +148,9 @@ int start_game(t_cub_data *cb_data)
     cb_data->check_draw_map = 1;
 
     draw_background(cb_data->map_img);
-    
+    ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
 	mlx_loop_hook(mlx, ft_hook, cb_data);
-    
+    mlx_key_hook(mlx, show_map, cb_data);
 
 	mlx_loop(mlx);
 

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:02:32 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/12 12:49:24 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:47:16 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+
+
+
 
 int is_wall(float x, float y, t_cub_data *cb_data)
 {

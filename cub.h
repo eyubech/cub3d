@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/16 11:46:46 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:11:14 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,17 @@ typedef struct s_ray
 {
 	float ray_angle;
 	float r_distance;
+	float player_rotation_angle;
 	float hit;
 	float hit_side;
-
+	float hx_inter;
+	float hy_inter;
+	float vx_inter;
+	float vy_inter;
+	float hor_dist;
+	float ver_dist;
+	int x;
+	int y;
 } t_ray;
 
 typedef struct s_player
@@ -67,7 +75,7 @@ typedef struct t_cub_data
 	t_ray ray;
 	t_player c_player;
 	float ray_angle;
-	struct s_ray *s_ray;
+	t_ray *sr;
 }	t_cub_data;
 
 
@@ -94,6 +102,9 @@ int		is_wall(float x, float y, t_cub_data *cb_data);
 void	ft_hook(void* param);
 void	draw_background(mlx_image_t* background);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
-void	drawing_walls(mlx_image_t* lines,t_cub_data *cb_data, int index);
+void	drawing_walls(t_cub_data *cb_data);
+void draw_map_rays(t_cub_data *cb_data);
+
+
 
 #endif
