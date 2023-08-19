@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/17 18:11:14 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:56:39 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 #define CELL_SIZE 15
 #define PLAYER_SIZE 4
 
+#define TEXTURE_WIDTH 15
+#define TEXTURE_HEIGHT 15
 
 typedef struct s_ray
 {
@@ -76,7 +78,17 @@ typedef struct t_cub_data
 	t_player c_player;
 	float ray_angle;
 	t_ray *sr;
+	
+	mlx_texture_t *t_wall;
+	mlx_texture_t *west_wall;
+	mlx_texture_t *south_wall;
+	mlx_texture_t *east_wall;
+	mlx_texture_t *north_wall;
+	
+	uint32_t *wall_texture;
+	
 }	t_cub_data;
+
 
 
 size_t	ft_strlen(char *s);
@@ -103,8 +115,8 @@ void	ft_hook(void* param);
 void	draw_background(mlx_image_t* background);
 // void	ft_hook(struct mlx_key_data key_data, void *param);
 void	drawing_walls(t_cub_data *cb_data);
-void draw_map_rays(t_cub_data *cb_data);
+void	draw_map_rays(t_cub_data *cb_data);
 
-
+void	texture_mapping(t_cub_data *cb_data);
 
 #endif

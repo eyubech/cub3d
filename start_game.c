@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/17 19:44:28 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:56:11 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	show_map(struct mlx_key_data key_data, void *param)
         cb_data->check_draw_map += 1;
     }
 }
+
 void	ft_hook(void* param)
 {
     float next_step_x;
@@ -146,9 +147,35 @@ int start_game(t_cub_data *cb_data)
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
 
     cb_data->check_draw_map = 1;
-
+    
+    cb_data->t_wall = mlx_load_png("rr.png");
+    // cb_data->north_wall = mlx_load_png("rr.png");
+    // cb_data->west_wall  = mlx_load_png("rr.png");
+    // cb_data->south_wall = mlx_load_png("rr.png");
+    // cb_data->east_wall  = mlx_load_png("rr.png");
+    
+    cb_data->wall_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->t_wall->height * cb_data->t_wall->width);
+    int i = 0;
+    int j = 0;
+    while(i < cb_data->t_wall->height * cb_data->t_wall->width * sizeof(uint32_t))
+    {
+        cb_data->wall_texture[j] = cb_data->t_wall->pixels[i] << 24 | cb_data->t_wall->pixels[i + 1] << 16 | cb_data->t_wall->pixels[i + 2] << 8 | cb_data->t_wall->pixels[i + 3];
+        j++;
+        i += cb_data->t_wall->bytes_per_pixel;
+    }
+    
     draw_background(cb_data->map_img);
     ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+    // for (size_t h = 0; h < cb_data->north_wall->width; h++)
+    // {
+    //     for (size_t i = 0; i < 5; i++)
+    //     {
+    //         for (size_t j = 0; j < 5; j++)
+    //         {
+    //             mlx_put_pixel(cb_data->map_img, h + i, j, pixels[j]);
+    //         }
+    //     }
+    // }
 	mlx_loop_hook(mlx, ft_hook, cb_data);
     mlx_key_hook(mlx, show_map, cb_data);
 

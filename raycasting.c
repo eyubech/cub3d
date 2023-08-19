@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:06:23 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/17 19:29:26 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:27:26 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player
 	
 	cb_data->ray_angle  = cb_data->c_player.rotation_angle - theta;
 	cb_data->sr = malloc((NUM_RAYS + 1) * sizeof(t_ray));
+	
+	cb_data->sr->hit_side = 0;
 	while(colomn < NUM_RAYS)
 	{
 		
@@ -70,7 +72,7 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player
 				check_h = cb_data->sr[colomn].hy_inter;
 			if(is_wall(check_h, cb_data->sr[colomn].hx_inter, cb_data) == 1)
 			{
-				
+				cb_data->sr[colomn].hit_side = 0;
 				break;
 			}
 			else
@@ -106,7 +108,7 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player
 				check_v = cb_data->sr[colomn].vx_inter;
 			if(is_wall(cb_data->sr[colomn].vy_inter, check_v, cb_data) == 1)
 			{
-				
+				cb_data->sr[colomn].hit_side = 1;
 				break;
 			}
 			else
