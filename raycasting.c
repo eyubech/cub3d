@@ -6,13 +6,13 @@
 /*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:06:23 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/19 12:27:26 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:42:01 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player_y)
+void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float player_y)
 {
 	float hx_inter;
 	float hy_inter;

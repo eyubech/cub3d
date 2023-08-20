@@ -6,7 +6,7 @@
 /*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/19 12:56:39 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:45:27 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ typedef struct s_ray
 	float vy_inter;
 	float hor_dist;
 	float ver_dist;
-	int x;
-	int y;
+	// int x;
+	// int y;
+	float x;
+	float y;
 } t_ray;
 
 typedef struct s_player
@@ -107,9 +109,9 @@ void	draw_map(t_cub_data *cb_data);
 void	draw_line_ver(mlx_image_t* lines);
 void	draw_line_hor(mlx_image_t* lines);
 void	draw_box(mlx_image_t* map, int x, int y, uint32_t color);
-void	draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data);
-void	draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map);
-void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, int player_x, int player_y);
+void	draw_player(mlx_image_t* player, float player_x, float player_y, t_cub_data *cb_data);
+void	draw_line(float x0, float y0, float x1, float y1,mlx_image_t* map);
+void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float player_y);
 int		is_wall(float x, float y, t_cub_data *cb_data);
 void	ft_hook(void* param);
 void	draw_background(mlx_image_t* background);

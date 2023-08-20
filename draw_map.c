@@ -6,7 +6,7 @@
 /*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/18 12:00:47 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:57:43 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,73 +85,119 @@ void draw_line_hor(mlx_image_t* lines)
     }
     
 }
-void draw_line(int x0, int y0, int x1, int y1,mlx_image_t* map) 
+void draw_line(float x0, float y0, float x1, float y1,mlx_image_t* map) 
 {
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = (dx > dy ? dx : -dy) / 2;
-    int e2;
-
-    while (1) 
+    float dx;
+    float dy;
+    int step;
+    float x_inc;
+    float y_inc;
+    int i;
+    dx = x1 - x0;
+    dy = y1 - y0;
+    // if(fabs(dx) > fabs(dy))
+    //     step = fabs(dx);
+    // else
+    //     step = fabs(dy);
+    step = fabs(dx) + fabs(dy);
+    x_inc = dx/step;
+    y_inc = dy/step;
+    i = 0;
+    while(i < step)
     {
-        
         mlx_put_pixel(map,x0, y0, 0x008000FF);
-        
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        e2 = err;
-
-        if (e2 > -dx) 
-        {
-            err -= dy;
-            x0 += sx;
-        }
-
-        if (e2 < dy) 
-        {
-            err += dx;
-            y0 += sy;
-        }
-
-        
+        x0 = x0 + x_inc;
+        y0 = y0 + y_inc;
+        i++;
     }
 }
+    // int dx = abs(x1 - x0);
+    // int dy = abs(y1 - y0);
+    // int sx = x0 < x1 ? 1 : -1;
+    // int sy = y0 < y1 ? 1 : -1;
+    // int err = (dx > dy ? dx : -dy) / 2;
+    // int e2;
 
-void draw_curs(int x0, int y0, int x1, int y1,mlx_image_t* map) 
+    // while (1) 
+    // {
+        
+    //     mlx_put_pixel(map,x0, y0, 0x008000FF);
+        
+    //     if (x0 == x1 && y0 == y1)
+    //         break;
+
+    //     e2 = err;
+
+    //     if (e2 > -dx) 
+    //     {
+    //         err -= dy;
+    //         x0 += sx;
+    //     }
+
+    //     if (e2 < dy) 
+    //     {
+    //         err += dx;
+    //         y0 += sy;
+    //     }
+
+        
+    // }
+// }
+
+void draw_curs(float x0, float y0, float x1, float y1,mlx_image_t* map) 
 {
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = (dx > dy ? dx : -dy) / 2;
-    int e2;
-
-    while (1) 
+    float dx;
+    float dy;
+    int step;
+    float x_inc;
+    float y_inc;
+    int i;
+    dx = x1 - x0;
+    dy = y1 - y0;
+    if(fabs(dx) > fabs(dy))
+        step = fabs(dx);
+    else
+        step = fabs(dy);
+    x_inc = dx/step;
+    y_inc = dy/step;
+    i = 1;
+    while(i < step)
     {
-        mlx_put_pixel(map,x0, y0, 0xFF0000FF);
-        
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        e2 = err;
-
-        if (e2 > -dx) 
-        {
-            err -= dy;
-            x0 += sx;
-        }
-
-        if (e2 < dy) 
-        {
-            err += dx;
-            y0 += sy;
-        }
-
-        
+        mlx_put_pixel(map,x0, y0, 0x008000FF);
+        x0 = x0 + x_inc;
+        y0 = y0 + y_inc;
+        i++;
     }
+    // int dx = abs(x1 - x0);
+    // int dy = abs(y1 - y0);
+    // int sx = x0 < x1 ? 1 : -1;
+    // int sy = y0 < y1 ? 1 : -1;
+    // int err = (dx > dy ? dx : -dy) / 2;
+    // int e2;
+
+    // while (1) 
+    // {
+    //     mlx_put_pixel(map,x0, y0, 0xFF0000FF);
+        
+    //     if (x0 == x1 && y0 == y1)
+    //         break;
+
+    //     e2 = err;
+
+    //     if (e2 > -dx) 
+    //     {
+    //         err -= dy;
+    //         x0 += sx;
+    //     }
+
+    //     if (e2 < dy) 
+    //     {
+    //         err += dx;
+    //         y0 += sy;
+    //     }
+
+        
+    // }
 }
 
 void draw_box(mlx_image_t* map, int x, int y, uint32_t color)
@@ -172,10 +218,10 @@ void draw_box(mlx_image_t* map, int x, int y, uint32_t color)
 	}
 }
 
-void draw_player(mlx_image_t* player, int player_x, int player_y, t_cub_data *cb_data)
+void draw_player(mlx_image_t* player, float player_x, float player_y, t_cub_data *cb_data)
 {
-	int i = player_x + PLAYER_SIZE;
-	int j = player_y + PLAYER_SIZE;
+	float i = player_x + PLAYER_SIZE;
+	float j = player_y + PLAYER_SIZE;
     (void)cb_data;
     cb_data->c_player.end_x = cb_data->c_player.px_dir + player_x;
     cb_data->c_player.end_y = cb_data->c_player.py_dir + player_y;
@@ -206,8 +252,8 @@ void draw_map(t_cub_data *cb_data)
 {
     int i;
     int j;
-    int x;
-    int y;
+    float x;
+    float y;
 
 
     i = 0;
