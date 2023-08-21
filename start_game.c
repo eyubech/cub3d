@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/21 10:12:49 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:01:37 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ void	show_map(struct mlx_key_data key_data, void *param)
         }
         cb_data->check_draw_map += 1;
     }
+    // if (key_data.key == MLX_KEY_P && key_data.action == 0)
+    // {
+    //     if(cb_data->pause_game % 2 == 0)
+    //     {
+    //         draw_background(cb_data->map_img);
+    //         ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+    //     }
+    //     else
+    //     {
+    //         draw_map(cb_data);
+    //         draw_map_rays(cb_data);
+    //         draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+    //     }
+    //     cb_data->check_draw_map += 1;
+    // }
 }
 
 void	ft_hook(void* param)
@@ -40,13 +55,18 @@ void	ft_hook(void* param)
     float next_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
     
+    
+
+    mlx_get_mouse_pos(cb_data->mlx, &cb_data->mouse_x, &cb_data->mouse_y);
+    
+
 
     
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cb_data->mlx);
 
     
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT))
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT) || (cb_data->offset_mouse_x > cb_data->mouse_x))
     {
         cb_data->c_player.rotation_angle -= 0.08;
         if (cb_data->c_player.rotation_angle < 0)
@@ -66,7 +86,7 @@ void	ft_hook(void* param)
     }
 
     
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT))
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT) || (cb_data->offset_mouse_x < cb_data->mouse_x) )
     {   
         cb_data->c_player.rotation_angle += 0.08;
         if (cb_data->c_player.rotation_angle >= 2 * M_PI)
@@ -125,7 +145,7 @@ void	ft_hook(void* param)
     }
     
     
-    
+    cb_data->offset_mouse_x = cb_data->mouse_x;
 }
 
 int start_game(t_cub_data *cb_data)
@@ -149,8 +169,11 @@ int start_game(t_cub_data *cb_data)
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
 
     cb_data->check_draw_map = 1;
-    
+    cb_data->pause_game = 1;
     cb_data->t_wall = mlx_load_png("rr.png");
+
+
+    
     // cb_data->north_wall = mlx_load_png("rr.png");
     // cb_data->west_wall  = mlx_load_png("rr.png");
     // cb_data->south_wall = mlx_load_png("rr.png");
@@ -165,9 +188,11 @@ int start_game(t_cub_data *cb_data)
         j++;
         i += cb_data->t_wall->bytes_per_pixel;
     }
-    
     draw_background(cb_data->map_img);
-    ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+    ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y);
+    
+    mlx_set_cursor_mode(cb_data->mlx, MLX_MOUSE_DISABLED);
+    mlx_get_mouse_pos(cb_data->mlx, &cb_data->offset_mouse_x, &cb_data->offset_mouse_y);
     // for (size_t h = 0; h < cb_data->north_wall->width; h++)
     // {
     //     for (size_t i = 0; i < 5; i++)

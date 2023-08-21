@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/20 11:45:27 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:54:51 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct t_cub_data
 	char *map_name;
 	char **map;
 	int map_fd;
+	
 	int check_draw_map;
 	mlx_image_t* map_img;
 	mlx_t* mlx;
@@ -80,7 +81,8 @@ typedef struct t_cub_data
 	t_player c_player;
 	float ray_angle;
 	t_ray *sr;
-	
+	int pause_game;
+
 	mlx_texture_t *t_wall;
 	mlx_texture_t *west_wall;
 	mlx_texture_t *south_wall;
@@ -88,7 +90,12 @@ typedef struct t_cub_data
 	mlx_texture_t *north_wall;
 	
 	uint32_t *wall_texture;
-	
+
+
+	int offset_mouse_x;
+	int offset_mouse_y;
+	int mouse_x;
+	int mouse_y;
 }	t_cub_data;
 
 
