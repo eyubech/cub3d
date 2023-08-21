@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:06:23 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/20 11:42:01 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:20:19 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float pl
 				check_h = cb_data->sr[colomn].hy_inter;
 			if(is_wall(check_h, cb_data->sr[colomn].hx_inter, cb_data) == 1)
 			{
-				cb_data->sr[colomn].hit_side = 0;
+				// cb_data->sr[colomn].hit_side = 0;
 				break;
 			}
 			else
@@ -89,6 +89,7 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float pl
 			cb_data->sr[colomn].vx_inter = (int)(player_x / CELL_SIZE) * CELL_SIZE + CELL_SIZE;
 		else
 			cb_data->sr[colomn].vx_inter = (int)(player_x / CELL_SIZE) * CELL_SIZE;
+			
 		cb_data->sr[colomn].vy_inter = player_y + ((cb_data->sr[colomn].vx_inter - player_x) * tan(cb_data->ray_angle));
 		delta_x = CELL_SIZE;
 		if(cos(cb_data->ray_angle) < 0)
@@ -105,10 +106,10 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float pl
 			if(cos(cb_data->ray_angle) <= 0)
 				check_v = cb_data->sr[colomn].vx_inter - 1;
 			else
-				check_v = cb_data->sr[colomn].vx_inter;
+				check_v = cb_data->sr[colomn].vx_inter ;
 			if(is_wall(cb_data->sr[colomn].vy_inter, check_v, cb_data) == 1)
 			{
-				cb_data->sr[colomn].hit_side = 1;
+				// cb_data->sr[colomn].hit_side = 1;
 				break;
 			}
 			else
@@ -129,11 +130,13 @@ void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float pl
 		if(cb_data->sr[colomn].hor_dist < cb_data->sr[colomn].ver_dist)
 		{
 			cb_data->sr[colomn].r_distance = cb_data->sr[colomn].hor_dist;
+			cb_data->sr[colomn].hit_side = 0;
 			// draw_line(player_x, player_y, cb_data->sr[colomn].hx_inter, cb_data->sr[colomn].hy_inter, cb_data->map_img);
 		}
 		else
 		{
 			cb_data->sr[colomn].r_distance = cb_data->sr[colomn].ver_dist;
+			cb_data->sr[colomn].hit_side = 1;
 			// draw_line(player_x, player_y, cb_data->sr[colomn].vx_inter, cb_data->sr[colomn].vy_inter, cb_data->map_img);
 		}
 

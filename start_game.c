@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/19 17:56:11 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:12:49 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
-        
+        printf("************************************************\n");
     }
 
     
@@ -82,7 +82,7 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
-        
+        printf("************************************************\n");
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
     {
@@ -101,6 +101,7 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
+        printf("************************************************\n");
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
@@ -120,6 +121,7 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
+        printf("************************************************\n");
     }
     
     

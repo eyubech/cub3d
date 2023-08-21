@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/20 11:57:43 by nel-mous         ###   ########.fr       */
+/*   Updated: 2023/08/20 15:59:52 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,6 @@ void draw_line(float x0, float y0, float x1, float y1,mlx_image_t* map)
     int i;
     dx = x1 - x0;
     dy = y1 - y0;
-    // if(fabs(dx) > fabs(dy))
-    //     step = fabs(dx);
-    // else
-    //     step = fabs(dy);
     step = fabs(dx) + fabs(dy);
     x_inc = dx/step;
     y_inc = dy/step;
@@ -111,38 +107,7 @@ void draw_line(float x0, float y0, float x1, float y1,mlx_image_t* map)
         i++;
     }
 }
-    // int dx = abs(x1 - x0);
-    // int dy = abs(y1 - y0);
-    // int sx = x0 < x1 ? 1 : -1;
-    // int sy = y0 < y1 ? 1 : -1;
-    // int err = (dx > dy ? dx : -dy) / 2;
-    // int e2;
 
-    // while (1) 
-    // {
-        
-    //     mlx_put_pixel(map,x0, y0, 0x008000FF);
-        
-    //     if (x0 == x1 && y0 == y1)
-    //         break;
-
-    //     e2 = err;
-
-    //     if (e2 > -dx) 
-    //     {
-    //         err -= dy;
-    //         x0 += sx;
-    //     }
-
-    //     if (e2 < dy) 
-    //     {
-    //         err += dx;
-    //         y0 += sy;
-    //     }
-
-        
-    // }
-// }
 
 void draw_curs(float x0, float y0, float x1, float y1,mlx_image_t* map) 
 {
