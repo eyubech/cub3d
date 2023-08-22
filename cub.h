@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/21 18:54:51 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:03:25 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ typedef struct s_ray
 	float vy_inter;
 	float hor_dist;
 	float ver_dist;
-	// int x;
-	// int y;
 	float x;
 	float y;
 } t_ray;
@@ -83,15 +81,18 @@ typedef struct t_cub_data
 	t_ray *sr;
 	int pause_game;
 
-	mlx_texture_t *t_wall;
 	mlx_texture_t *west_wall;
 	mlx_texture_t *south_wall;
 	mlx_texture_t *east_wall;
 	mlx_texture_t *north_wall;
 	
-	uint32_t *wall_texture;
+	uint32_t *north_texture;
+	uint32_t *south_texture;
+	uint32_t *east_texture;
+	uint32_t *west_texture;
 
 
+	
 	int offset_mouse_x;
 	int offset_mouse_y;
 	int mouse_x;

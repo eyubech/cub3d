@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/20 15:59:52 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:21:27 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ void draw_map(t_cub_data *cb_data)
         while (cb_data->map[i][j])
         {
             if (cb_data->map[i][j] == '1')
-                draw_box(cb_data->map_img, x, y, 0x0000FFFF);
+                draw_box(cb_data->map_img, x, y, 0x8DC98CFF);
             else
                 draw_box(cb_data->map_img, x, y, 0xFFFFFFFF);
             j += 1;
