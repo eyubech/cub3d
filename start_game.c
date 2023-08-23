@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/23 11:20:51 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:33:23 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,14 @@ void	show_map(struct mlx_key_data key_data, void *param)
         }
         cb_data->check_draw_map += 1;
     }
-    // if (key_data.key == MLX_KEY_P && key_data.action == 0)
-    // {
-    //     if(cb_data->pause_game % 2 == 0)
-    //     {
-    //         draw_background(cb_data->map_img);
-    //         ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
-    //     }
-    //     else
-    //     {
-    //         draw_map(cb_data);
-    //         draw_map_rays(cb_data);
-    //         draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
-    //     }
-    //     cb_data->check_draw_map += 1;
-    // }
+    if (key_data.key == MLX_KEY_C && key_data.action == 0)
+    {
+        if(cb_data->check_mouse % 2 == 0)
+            mlx_set_cursor_mode(cb_data->mlx, MLX_MOUSE_DISABLED);
+        else
+            mlx_set_cursor_mode(cb_data->mlx, MLX_MOUSE_NORMAL);
+        cb_data->check_mouse += 1;
+    }
 }
 
 void	ft_hook(void* param)
@@ -66,7 +59,7 @@ void	ft_hook(void* param)
         mlx_close_window(cb_data->mlx);
 
     
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT) || (cb_data->offset_mouse_x > cb_data->mouse_x))
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT) || ((cb_data->offset_mouse_x > cb_data->mouse_x && cb_data->check_mouse % 2 != 0)))
     {
         cb_data->c_player.rotation_angle -= 0.08;
         if (cb_data->c_player.rotation_angle < 0)
@@ -85,7 +78,7 @@ void	ft_hook(void* param)
     }
 
     
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT) || (cb_data->offset_mouse_x < cb_data->mouse_x) )
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_RIGHT) || (cb_data->offset_mouse_x < cb_data->mouse_x && cb_data->check_mouse % 2 != 0) )
     {   
         cb_data->c_player.rotation_angle += 0.08;
         if (cb_data->c_player.rotation_angle >= 2 * M_PI)
@@ -166,7 +159,7 @@ int start_game(t_cub_data *cb_data)
 
     cb_data->check_draw_map = 1;
     cb_data->pause_game = 1;
-    
+    cb_data->check_mouse = 1;
     cb_data->north_wall = mlx_load_png("rr.png");
     cb_data->south_wall = mlx_load_png("ff.png");
     cb_data->east_wall = mlx_load_png("dd.png");
@@ -175,6 +168,7 @@ int start_game(t_cub_data *cb_data)
     
     cb_data->north_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->north_wall->height * cb_data->north_wall->width);
     cb_data->south_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->south_wall->height * cb_data->south_wall->width);
+    
     cb_data->east_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->east_wall->height * cb_data->east_wall->width);
     cb_data->west_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->west_wall->height * cb_data->west_wall->width);
     

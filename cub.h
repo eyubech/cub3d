@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/22 18:03:25 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:28:47 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct t_cub_data
 	int offset_mouse_y;
 	int mouse_x;
 	int mouse_y;
+	int check_mouse;
 }	t_cub_data;
 
 
