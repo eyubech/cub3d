@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:57:39 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/23 14:30:14 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:12:11 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	draw_map_rays(t_cub_data *cb_data)
 		if (cb_data->sr[index].hor_dist <= cb_data->sr[index].ver_dist)
 			draw_line(cb_data->sr[index].x, cb_data->sr[index].y,
 					cb_data->sr[index].hx_inter, cb_data->sr[index].hy_inter,
-					cb_data->map_img);
+					cb_data);
 		else
 			draw_line(cb_data->sr[index].x, cb_data->sr[index].y,
 					cb_data->sr[index].vx_inter, cb_data->sr[index].vy_inter,
-					cb_data->map_img);
+					cb_data);
 		index += 1;
 	}
 }
@@ -78,7 +78,7 @@ void	draw_wall(t_cub_data *cb_data, int index)
 		if (sin(cb_data->sr[index].ray_angle) < 0 && cb_data->sr[index].hit_side == 0)
 			mlx_put_pixel(cb_data->map_img, index, start + y,
 					cb_data->north_texture[((int)offset_y
-						* cb_data->north_wall->width) + (int)offset_x]);
+						* cb_data->north_wall->width) + (int)offset_x] );
 
 
 
@@ -89,7 +89,7 @@ void	draw_wall(t_cub_data *cb_data, int index)
 			
 			mlx_put_pixel(cb_data->map_img, index, start + y,
 					cb_data->south_texture[((int)offset_y
-						* cb_data->south_wall->width) + (int)offset_x]);
+						* cb_data->south_wall->width) + (int)offset_x] );
 		}
 		
 
@@ -99,12 +99,12 @@ void	draw_wall(t_cub_data *cb_data, int index)
         else if (cos(cb_data->sr[index].ray_angle) > 0 && cb_data->sr[index].hit_side == 1)
 			mlx_put_pixel(cb_data->map_img, index, start + y,
 					cb_data->east_texture[((int)offset_y
-						* cb_data->east_wall->width) + (int)offset_x]);
+						* cb_data->east_wall->width) + (int)offset_x] );
 
         else if (cos(cb_data->sr[index].ray_angle) < 0 && cb_data->sr[index].hit_side == 1)
 			mlx_put_pixel(cb_data->map_img, index, start + y,
 					cb_data->west_texture[((int)offset_y
-						* cb_data->west_wall->width) + (int)offset_x]);
+						* cb_data->west_wall->width) + (int)offset_x] );
                         
 
 
