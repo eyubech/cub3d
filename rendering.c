@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:57:39 by nel-mous          #+#    #+#             */
-/*   Updated: 2023/08/22 18:34:31 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:38:37 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,19 @@ void	draw_wall(t_cub_data *cb_data, int index)
 	float	offset_y;
 	float	e;
 	float	step;
-
+	float	Dis_From_Proplane;
+	
 	alpha = cb_data->sr[index].ray_angle
 		- cb_data->sr[index].player_rotation_angle;
-	corr_dist = cb_data->sr[index].r_distance * cos(alpha) / CELL_SIZE;
-	Projected_Wall_Height = (HEIGHT / corr_dist);
+	corr_dist = cb_data->sr[index].r_distance * cos(alpha);
+    Dis_From_Proplane = (WIDTH / 2) / tan(FOV / 2);
+    Projected_Wall_Height = (CELL_SIZE / corr_dist) * Dis_From_Proplane;
 	start = HEIGHT / 2 - Projected_Wall_Height / 2;
 	if (start < 0)
 		start = 0;
+
 	offset_y = 0;
 	offset_x = 0;
-	printf("%f\n", cb_data->sr[index].hit_side);
 	if (cb_data->sr[index].hit_side == 0)
 		offset_x = (int)(cb_data->sr[index].hx_inter
 				* cb_data->north_wall->width / CELL_SIZE)
@@ -61,6 +63,10 @@ void	draw_wall(t_cub_data *cb_data, int index)
 		offset_x = (int)(cb_data->sr[index].vy_inter
 				* cb_data->north_wall->width / CELL_SIZE)
 			% cb_data->north_wall->width;
+	
+	if ((sin(cb_data->sr[index].ray_angle) > 0 && cb_data->sr[index].hit_side == 0) || (cos(cb_data->sr[index].ray_angle) < 0 && cb_data->sr[index].hit_side == 1))
+		offset_x = cb_data->north_wall->width - offset_x;
+	
 	step = cb_data->north_wall->height / Projected_Wall_Height;
 	e = Projected_Wall_Height / 2 - HEIGHT / 2;
 	if (e < 0)
@@ -74,12 +80,22 @@ void	draw_wall(t_cub_data *cb_data, int index)
 					cb_data->north_texture[((int)offset_y
 						* cb_data->north_wall->width) + (int)offset_x]);
 
-        
+
+
+
+
 		else if (sin(cb_data->sr[index].ray_angle) > 0 && cb_data->sr[index].hit_side == 0)
+		{
+			
 			mlx_put_pixel(cb_data->map_img, index, start + y,
 					cb_data->south_texture[((int)offset_y
 						* cb_data->south_wall->width) + (int)offset_x]);
-        
+		}
+		
+
+
+
+		
         else if (cos(cb_data->sr[index].ray_angle) > 0 && cb_data->sr[index].hit_side == 1)
 			mlx_put_pixel(cb_data->map_img, index, start + y,
 					cb_data->east_texture[((int)offset_y
@@ -102,7 +118,7 @@ void	drawing_walls(t_cub_data *cb_data)
 	int index;
 
 	index = 0;
-
+	
 	while (index < NUM_RAYS)
 	{
 		draw_wall(cb_data, index);

@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/22 18:10:31 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:20:51 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
-        printf("************************************************\n");
     }
 
     
@@ -102,7 +101,6 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
-        printf("************************************************\n");
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
     {
@@ -121,7 +119,6 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
-        printf("************************************************\n");
     }
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
     {
@@ -141,7 +138,6 @@ void	ft_hook(void* param)
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
             draw_map_rays(cb_data);
         }
-        printf("************************************************\n");
     }
     
     
@@ -179,7 +175,6 @@ int start_game(t_cub_data *cb_data)
     
     cb_data->north_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->north_wall->height * cb_data->north_wall->width);
     cb_data->south_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->south_wall->height * cb_data->south_wall->width);
-    
     cb_data->east_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->east_wall->height * cb_data->east_wall->width);
     cb_data->west_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->west_wall->height * cb_data->west_wall->width);
     
