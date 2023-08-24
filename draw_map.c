@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:50:42 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/23 17:12:11 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:57:29 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,36 @@
 
 
 
+void draw_pause_icon(t_cub_data *cb_data)
+{
+    int x = (WIDTH / 2) - 80;
+    int y = (HEIGHT / 2) - 50;
+    
+    while (x < ((WIDTH / 2) - 80) + 40)
+    {
+        y = (HEIGHT / 2) - 50;
+        while (y < ((HEIGHT / 2) - 50) + 140)
+        {
+            mlx_put_pixel(cb_data->map_img, x, y, 0x008081FF);
+            y += 1;
+        }
+        x += 1;
+    }
 
+    x = (WIDTH / 2);
+    y = (HEIGHT / 2) - 50;
+    
+    while (x < ((WIDTH / 2)) + 40)
+    {
+        y = (HEIGHT / 2) - 50;
+        while (y < ((HEIGHT / 2) - 50) + 140)
+        {
+            mlx_put_pixel(cb_data->map_img, x, y, 0x008081FF);
+            y += 1;
+        }
+        x += 1;
+    }
+}
 
 void draw_background(t_cub_data *cb_data)
 {
@@ -26,7 +55,7 @@ void draw_background(t_cub_data *cb_data)
         y = 0;
         while (y < HEIGHT / 2)
         {
-            mlx_put_pixel(cb_data->map_img, x, y, 0x6F2DA8FF );
+            mlx_put_pixel(cb_data->map_img, x, y, 0x873260FF );
             y += 1;
         }
         x += 1;
@@ -37,7 +66,7 @@ void draw_background(t_cub_data *cb_data)
         y = HEIGHT / 2;
         while (y < HEIGHT)
         {
-            mlx_put_pixel(cb_data->map_img, x, y, 0x808080FF );
+            mlx_put_pixel(cb_data->map_img, x, y, 0x9B9B9BFF );
             y += 1;
         }
         x += 1;
@@ -101,7 +130,7 @@ void draw_line(float x0, float y0, float x1, float y1, t_cub_data *cb_data)
     i = 0;
     while(i < step)
     {
-        mlx_put_pixel(cb_data->map_img,x0, y0, 0x008000FF );
+        mlx_put_pixel(cb_data->map_img,x0, y0, 0xD44C41FF);
         x0 = x0 + x_inc;
         y0 = y0 + y_inc;
         i++;
@@ -195,7 +224,7 @@ void draw_map(t_cub_data *cb_data)
         while (cb_data->map[i][j])
         {
             if (cb_data->map[i][j] == '1')
-                draw_box(cb_data->map_img, x, y, 0x8DC98CFF);
+                draw_box(cb_data->map_img, x, y, 0xCD544AFF);
             else
                 draw_box(cb_data->map_img, x, y, 0xFFFFFFFF);
             j += 1;

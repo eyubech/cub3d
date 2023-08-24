@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/23 17:12:25 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:59:36 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	draw_background(t_cub_data *cb_data);
 void	draw_line(float x0, float y0, float x1, float y1, t_cub_data *cb_data);
 
 // void	ft_hook(struct mlx_key_data key_data, void *param);
-
+void draw_pause_icon(t_cub_data *cb_data);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/23 17:26:51 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:23:00 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,17 @@ void	show_map(struct mlx_key_data key_data, void *param)
         if(cb_data->check_draw_map % 2 == 0)
         {
             draw_background(cb_data);
-            ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+            ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y);
+            if (cb_data->pause_game % 2 != 0)
+                draw_pause_icon(cb_data);
         }
         else
         {
             draw_map(cb_data);
             draw_map_rays(cb_data);
             draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            if (cb_data->pause_game % 2 != 0)
+                draw_pause_icon(cb_data);
         }
         cb_data->check_draw_map += 1;
     }
@@ -44,11 +48,19 @@ void	show_map(struct mlx_key_data key_data, void *param)
     if (key_data.key == MLX_KEY_P && key_data.action == 0)
     {
         if (cb_data->pause_game % 2 == 0)
+            draw_pause_icon(cb_data);
+        else
         {
-            draw_map(cb_data);
-            draw_map_rays(cb_data);
-            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_background(cb_data);
+            ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+            if(cb_data->check_draw_map % 2 == 0)
+            {
+                draw_map(cb_data);
+                draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+                draw_map_rays(cb_data);
+            }
         }
+            
         cb_data->pause_game += 1;
     }
 }
@@ -62,15 +74,12 @@ void	ft_hook(void* param)
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cb_data->mlx);
     
-    if(cb_data->pause_game % 2 == 0)
+    if(cb_data->pause_game % 2 != 0)
         return;
 
 
     mlx_get_mouse_pos(cb_data->mlx, &cb_data->mouse_x, &cb_data->mouse_y);
-    
-
-
-    
+\
 
     
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_LEFT) || ((cb_data->offset_mouse_x > cb_data->mouse_x && cb_data->check_mouse % 2 != 0)))
@@ -172,7 +181,7 @@ int start_game(t_cub_data *cb_data)
     cb_data->c_player.py_dir = sin(cb_data->c_player.rotation_angle) * 3;
 
     cb_data->check_draw_map = 1;
-    cb_data->pause_game = 1;
+    cb_data->pause_game = 2;
     cb_data->check_mouse = 1;
 
 
@@ -181,21 +190,6 @@ int start_game(t_cub_data *cb_data)
     cb_data->south_wall = mlx_load_png("ff.png");
     cb_data->east_wall = mlx_load_png("dd.png");
     cb_data->west_wall = mlx_load_png("hh.png");
-    
-    // cb_data->north_wall = NULL;
-    // cb_data->south_wall = NULL;
-    // cb_data->east_wall = NULL;
-    // cb_data->west_wall = NULL;
-    
-    // int gg = 0;
-    // while (!cb_data->north_wall && !cb_data->south_wall && !cb_data->east_wall && !cb_data->west_wall)
-    // {
-    //     cb_data->north_wall = mlx_load_png("rr.png");
-    //     cb_data->south_wall = mlx_load_png("ff.png");
-    //     cb_data->east_wall = mlx_load_png("dd.png");
-    //     cb_data->west_wall = mlx_load_png("hh.png");
-    //     printf("%d\n", gg++);
-    // }
     
     
     cb_data->north_texture = (uint32_t *)malloc(sizeof(uint32_t) *  cb_data->north_wall->height * cb_data->north_wall->width);
@@ -237,6 +231,9 @@ int start_game(t_cub_data *cb_data)
     mlx_set_cursor_mode(cb_data->mlx, MLX_MOUSE_DISABLED);
     mlx_get_mouse_pos(cb_data->mlx, &cb_data->offset_mouse_x, &cb_data->offset_mouse_y);
 
+
+
+    // draw_pause_icon(cb_data);
 
 
 	mlx_loop_hook(mlx, ft_hook, cb_data);
