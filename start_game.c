@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:11:04 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/24 13:23:00 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:04:54 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_hook(void* param)
     float next_step_x;
     float next_step_y;
     t_cub_data *cb_data = (t_cub_data *)param;
-    
+         
     if (mlx_is_key_down(cb_data->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cb_data->mlx);
     
@@ -118,7 +118,7 @@ void	ft_hook(void* param)
             draw_map_rays(cb_data);
         }
     }
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_UP))
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_W))
     {
         next_step_x = cb_data->c_player.player_x + cb_data->c_player.px_dir;
         next_step_y = cb_data->c_player.player_y + cb_data->c_player.py_dir;
@@ -136,7 +136,8 @@ void	ft_hook(void* param)
             draw_map_rays(cb_data);
         }
     }
-    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_DOWN))
+        
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_S))
     {
         next_step_x = cb_data->c_player.player_x - cb_data->c_player.px_dir;
         next_step_y = cb_data->c_player.player_y - cb_data->c_player.py_dir;
@@ -156,6 +157,50 @@ void	ft_hook(void* param)
         }
     }
     
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_D))
+    {
+        
+        next_step_x = cb_data->c_player.player_x + cos(cb_data->c_player.rotation_angle + M_PI / 2);
+        next_step_y = cb_data->c_player.player_x + sin(cb_data->c_player.rotation_angle + M_PI / 2);
+        
+        if(cb_data->map[((int)next_step_y) / CELL_SIZE][((int)next_step_x) / CELL_SIZE] != '1')
+        {
+            cb_data->c_player.player_x += cos(cb_data->c_player.rotation_angle + M_PI / 2);
+            cb_data->c_player.player_x += sin(cb_data->c_player.rotation_angle + M_PI / 2);
+            
+        }
+        
+        draw_background(cb_data);
+        ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        if(cb_data->check_draw_map % 2 == 0)
+        {
+            draw_map(cb_data);
+            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_map_rays(cb_data);
+        }
+    }
+    
+    if (mlx_is_key_down(cb_data->mlx, MLX_KEY_A))
+    {
+        
+        next_step_x = cb_data->c_player.player_x -= cos(cb_data->c_player.rotation_angle + M_PI / 2);
+        next_step_y = cb_data->c_player.player_y -= sin(cb_data->c_player.rotation_angle + M_PI / 2);
+    
+        if(cb_data->map[((int)next_step_y) / CELL_SIZE][((int)next_step_x) / CELL_SIZE] != '1')
+        {
+            cb_data->c_player.player_x -= cb_data->c_player.px_dir / 4;
+            cb_data->c_player.player_y -= cb_data->c_player.py_dir / 4;
+            
+        }
+        draw_background(cb_data);
+        ray_cast(cb_data->map_img, cb_data, cb_data->c_player.player_x, cb_data->c_player.player_y); 
+        if(cb_data->check_draw_map % 2 == 0)
+        {
+            draw_map(cb_data);
+            draw_player(cb_data->map_img, cb_data->c_player.player_x, cb_data->c_player.player_y , cb_data);
+            draw_map_rays(cb_data);
+        }
+    }
     
     cb_data->offset_mouse_x = cb_data->mouse_x;
 }

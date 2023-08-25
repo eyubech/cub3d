@@ -6,7 +6,7 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/24 11:59:36 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:36:19 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,18 @@ typedef struct s_player
 	float rotation_angle;
 	
 } t_player;
+
+typedef struct t_map_parsing_data
+{
+	int y;
+	char *readed;
+	char *west_wall;
+	char *south_wall;
+	char *east_wall;
+	char *north_wall;
+	
+} t_map_data;
+
 
 typedef struct t_cub_data
 {
@@ -127,8 +139,8 @@ void	draw_line(float x0, float y0, float x1, float y1, t_cub_data *cb_data);
 
 // void	ft_hook(struct mlx_key_data key_data, void *param);
 void draw_pause_icon(t_cub_data *cb_data);
-
-
+void fill_map(t_cub_data *cb_data);
+void parse_map(t_cub_data *cb_data, t_map_data *t_map);
 
 void	drawing_walls(t_cub_data *cb_data);
 void	draw_map_rays(t_cub_data *cb_data);

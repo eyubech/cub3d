@@ -6,42 +6,40 @@
 /*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 19:10:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/07/28 21:26:15 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:38:10 by aech-che         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-
-
-
-
-void count_map_lines(t_cub_data *cb_data)
+void parse_map(t_cub_data *cb_data, t_map_data *t_map)
 {
-    char *s;
-    
-    while (1)
-    {
-        s = get_next_line(cb_data->map_fd);
-        if (!s)
-            break;
-        
-		
-        
-
-
-
-        free(s);
-    }
-    
+	while (1)
+	{
+		t_map->readed = get_next_line(cb_data->map_fd);
+		printf("** %s\n", t_map->readed);
+			exit(0);
+		if(t_map->readed[0] != '\n' && t_map->readed[0] != '\0')
+		{
+			printf("** %s\n", t_map->readed);
+		}
+	}
+	
 }
-
-
 
 
 void fill_map(t_cub_data *cb_data)
 {
+	t_map_data *t_map;
+	
     cb_data->map_fd = open(cb_data->map_name, O_RDONLY);
+	// parse_map(cb_data, t_map);
+	if(cb_data->map_fd == -1)
+	{
+		show_errors("Error while opening the file");
+		exit(2);
+	}
+	
 }
 
 
