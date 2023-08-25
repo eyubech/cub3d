@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aech-che <aech-che@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nel-mous <nel-mous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:14:38 by aech-che          #+#    #+#             */
-/*   Updated: 2023/08/25 15:36:19 by aech-che         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:19:07 by nel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,74 +77,91 @@ typedef struct t_map_parsing_data
 	
 } t_map_data;
 
+typedef struct s_texture
+{
+	float	pro_height;
+	float	corr_dist;
+	float	alpha;
+	float	start;
+	float	offset_x;
+	float	offset_y;
+	float	e;
+	float	step;
+	float	pro_dist;
+} t_texture;
 
 typedef struct t_cub_data
 {
-	char *map_name;
-	char **map;
-	int map_fd;
-	
-	int check_draw_map;
-	mlx_image_t* map_img;
-	mlx_t* mlx;
-	t_ray ray;
-	t_player c_player;
-	float ray_angle;
-	t_ray *sr;
-	int pause_game;
+	char		*map_name;
+	char		**map;
+	int			map_fd;
+	int			check_draw_map;
+	mlx_image_t	*map_img;
+	mlx_t		*mlx;
+	t_ray		ray;
+	t_player	c_player;
+	float		ray_angle;
+	t_ray		*sr;
+	int			pause_game;
 
 	mlx_texture_t *west_wall;
 	mlx_texture_t *south_wall;
 	mlx_texture_t *east_wall;
 	mlx_texture_t *north_wall;
-	
 	uint32_t *north_texture;
 	uint32_t *south_texture;
 	uint32_t *east_texture;
 	uint32_t *west_texture;
-
-
-	
 	int offset_mouse_x;
 	int offset_mouse_y;
 	int mouse_x;
 	int mouse_y;
 	int check_mouse;
+
+	t_texture tex;
 }	t_cub_data;
-
-
 
 size_t	ft_strlen(char *s);
 char	*ft_substr(char *s, int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s1);
-void    show_errors(char *message);
-int    start_game(t_cub_data *cb_data);
-int    read_map(t_cub_data *cb_data);
+void	show_errors(char *message);
+int		start_game(t_cub_data *cb_data);
+int		read_map(t_cub_data *cb_data);
 int		suff_error(t_cub_data *cb_data);
 int		check_erros(t_cub_data *cb_data);
 char	*ft_strtrim(char *s1, char *set);
 char	*get_next_line(int fd);
 char	*ft_strchr(char *s, int c);
 void	draw_map(t_cub_data *cb_data);
-void	draw_box(mlx_image_t* map, int x, int y, uint32_t color);
-void	draw_player(mlx_image_t* player, float player_x, float player_y, t_cub_data *cb_data);
-void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, float player_x, float player_y);
+void	draw_box(mlx_image_t *map, int x, int y, uint32_t color);
+void	draw_player(mlx_image_t *player, float player_x, 
+			float player_y, t_cub_data *cb_data);
+void	ray_cast(mlx_image_t *player, t_cub_data *cb_data, 
+			float player_x, float player_y);
 int		is_wall(float x, float y, t_cub_data *cb_data);
-void	ft_hook(void* param);
+void	ft_hook(void *param);
 void	draw_background(t_cub_data *cb_data);
-
 
 void	draw_line(float x0, float y0, float x1, float y1, t_cub_data *cb_data);
 
 // void	ft_hook(struct mlx_key_data key_data, void *param);
-void draw_pause_icon(t_cub_data *cb_data);
-void fill_map(t_cub_data *cb_data);
-void parse_map(t_cub_data *cb_data, t_map_data *t_map);
+void	draw_pause_icon(t_cub_data *cb_data);
+void	fill_map(t_cub_data *cb_data);
+void	parse_map(t_cub_data *cb_data, t_map_data *t_map);
 
 void	drawing_walls(t_cub_data *cb_data);
 void	draw_map_rays(t_cub_data *cb_data);
 
-void	texture_mapping(t_cub_data *cb_data);
+void	normalize_angle(t_cub_data *cb_data);
+void	check_horizontal(t_cub_data *cb_data, float delta_x, 
+			float delta_y, int colomn);
+void	check_vertical(t_cub_data *cb_data, float delta_x,
+			float delta_y, int colomn);
+
+void	initialize_vars(t_cub_data *cb_data, int index);
+void	set_offset(t_cub_data *cb_data, int index);
+void	put_pixel(t_cub_data *cb_data, int index, int y);
+void	draw_wall(t_cub_data *cb_data, int index);
 
 #endif
